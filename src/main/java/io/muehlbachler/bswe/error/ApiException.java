@@ -20,17 +20,11 @@ public class ApiException extends Exception {
       return HttpStatus.INTERNAL_SERVER_ERROR;
     }
 
-    switch (type) {
-      case GEOCODING_FAILED:
-      case NO_AIRPORT_FOUND:
-      case FORECAST_FAILED:
-      case NO_DATA:
-        return HttpStatus.BAD_REQUEST;
-      case SAVE_ERROR:
-        return HttpStatus.CONFLICT;
-      default:
-        return HttpStatus.INTERNAL_SERVER_ERROR;
-    }
+      return switch (type) {
+          case GEOCODING_FAILED, NO_AIRPORT_FOUND, FORECAST_FAILED, NO_DATA -> HttpStatus.BAD_REQUEST;
+          case SAVE_ERROR -> HttpStatus.CONFLICT;
+          default -> HttpStatus.INTERNAL_SERVER_ERROR;
+      };
   }
 
   public enum ApiExceptionType {
