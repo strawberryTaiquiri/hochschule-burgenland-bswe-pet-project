@@ -5,9 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import io.muehlbachler.bswe.repository.UserRepository;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+
 
 class UserTest {
+
+  @Mock
+  private UserRepository userRepository;
+
+
   @Test
   void testDefaultConstructor() {
     User user = new User();

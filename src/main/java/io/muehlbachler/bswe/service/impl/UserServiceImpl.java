@@ -25,26 +25,34 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public boolean exists(final String userId) {
-    // FIXME: implement
-    return true;
+    if(userId == null || "".equals(userId))
+      return false;
+    return userRepository.existsById(userId);
   }
 
   @Override
   public List<User> list() {
     final List<User> result = new ArrayList<>();
-    // FIXME: implement
+    Iterable<User> all = userRepository.findAll();
+
+    for(User i: all) {
+      result.add(i);
+    }
+
     return result;
   }
 
   @Override
   public User save(final User user) throws ApiException {
-    // FIXME: implement
-    return user;
+    return userRepository.save(user);
   }
 
   @Override
   public boolean delete(final String userId) {
-    // FIXME: implement
-    return true;
+    if (exists(userId)) {
+      userRepository.deleteById(userId);
+      return true;
+    }
+    return false;
   }
 }

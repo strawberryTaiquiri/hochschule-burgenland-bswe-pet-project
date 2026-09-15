@@ -49,7 +49,6 @@ public class UserServiceImplTest {
   @Test
   public void testExistsWithNonExistentUserId() {
     when(userRepository.existsById("nonexistent")).thenReturn(false);
-
     assertFalse(userService.exists("nonexistent"));
     verify(userRepository).existsById("nonexistent");
   }
